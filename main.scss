@@ -3,6 +3,14 @@
     .item {
         width: $size;
         height: $size;
-        background: tomato;
+        background: lightblue;
     }
 }
+
+// 컴파일되지 않는 주석
+/* 컴파일되는 주석 */
+
+/* Sass: 컴파일되는
+ * 여러 줄 
+ * 주석 별표 줄을 잘 맞춰서 작성해줘야 컴파일이 제대로 된다.  */
+
