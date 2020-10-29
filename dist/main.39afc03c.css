@@ -1,13 +1,7 @@
-@charset "UTF-8";
 .container .item {
   width: 100px;
   height: 100px;
   background: lightblue;
 }
-
-/* 컴파일되는 주석 */
-/* Sass: 컴파일되는
- * 여러 줄 
- * 주석 별표 줄을 잘 맞춰서 작성해줘야 컴파일이 제대로 된다.  */
 
 /*# sourceMappingURL=/main.39afc03c.css.map */
