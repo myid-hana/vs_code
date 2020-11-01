@@ -13,12 +13,24 @@
         <div class="item"></div>
     </div>
     <script>
-        console.log('Hello Javascript');
-        const hello3 = function(name) {
-            return `hello ${name}`;
+        function A(name) {
+            this.name = name;
+            return name;
         }
-        console.log(hello3('hana'));
-        hello3('Hqnq');
+
+        function B() {
+            this.hello = function() {
+                console.log("hello");
+                return this;
+            }
+        }
+
+        const a = new A('hana');
+        const b = new B();
+
+        // console.log(a);
+        // console.log(a.name);
+        console.log(b.hello());
     </script>
 </body>
 

@@ -12,14 +12,23 @@
     <div class="container">
         <div class="item"></div>
     </div>
-    <script>console.log('Hello Javascript');
+    <script>function A(name) {
+  this.name = name;
+  return name;
+}
 
-var hello3 = function hello3(name) {
-  return "hello ".concat(name);
-};
+function B() {
+  this.hello = function () {
+    console.log("hello");
+    return this;
+  };
+}
 
-console.log(hello3('hana'));
-hello3('Hqnq');</script>
+var a = new A('hana');
+var b = new B(); // console.log(a);
+// console.log(a.name);
+
+console.log(b.hello());</script>
 </body>
 
 </html>
