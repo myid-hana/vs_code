@@ -118,23 +118,26 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"example.js":[function(require,module,exports) {
-function A(name) {
+function Person(name, age) {
   this.name = name;
-  return name;
+  this.age = age; // this.hello = function () {
+  //     console.log('hello', this.name, this.age);
+  // };
 }
 
-function B() {
-  this.hello = function () {
-    console.log("hello");
-    return this;
-  };
-}
+Person.prototype.hello = function () {
+  console.log('hello2', this.name, this.age);
+};
 
-var a = new A('hana');
-var b = new B(); // console.log(a);
-// console.log(a.name);
-
-console.log(b.hello());
+var p = new Person('hana', 30);
+p.hello();
+console.log(p.toString());
+console.log(Person.prototype); // console.log(Person.prototype.toString);
+// console.log(Person.prototype.constructor);
+// console.log(Person.prototype.hello);
+// console.log(Object.prototype);
+// console.log(Object.prototype.toString);
+// console.log(Object.prototype.constructor);
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
