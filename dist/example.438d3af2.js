@@ -118,28 +118,22 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"example.js":[function(require,module,exports) {
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//표준 내장 객체 
-var a = new Array('white', 'black', 'red'); //배열을 만들어 주는 객체.
+//class
+//선언적 방식
+//선언적 방식이지만 호이스팅은 일어나지 않는다.
+var A = function A() {
+  _classCallCheck(this, A);
+};
 
-console.log(a, _typeof(a)); //배열을 만들어 주는 객체이기 때문에 결국 a 는 배열이면서 객체이다. 
+console.log(new A()); //class 표현식을 변수에 할당
 
-console.log(a instanceof Array); //true
+var B = function B() {
+  _classCallCheck(this, B);
+};
 
-console.log(a instanceof Object); //true
-//a 는 Array 와 Object 둘 다의 instance 이다. 
-// 리터럴로도 만들어 줄 수 있음. 
-
-var b = ['yellow', 'green', 'blue'];
-console.log(b, _typeof(b)); //object
-
-console.log(b.slice(0, 1)); //yellow(0번째 인자에서부터 1개 추출)
-
-console.log(Array.prototype.slice); // b 가 Array 의 instance 이기 때문에 Array 가 prototype 에 만들어 놓은 slice 함수를 사용할 수 있다. 
-
-console.log(Object.prototype.slice); //undefined
-// slilce 함수는 Array 에서 만들어 놓은 함수이고, Object 에서 만든 게 아니기 때문에 결과는 undefined
+console.log(new B());
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
