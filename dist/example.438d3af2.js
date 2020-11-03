@@ -118,26 +118,51 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"example.js":[function(require,module,exports) {
-function Person(name, age) {
-  this.name = name;
-  this.age = age; // this.hello = function () {
-  //     console.log('hello', this.name, this.age);
-  // };
-}
+function Person() {}
 
 Person.prototype.hello = function () {
-  console.log('hello2', this.name, this.age);
+  console.log('hello');
 };
 
-var p = new Person('hana', 30);
-p.hello();
-console.log(p.toString());
-console.log(Person.prototype); // console.log(Person.prototype.toString);
-// console.log(Person.prototype.constructor);
-// console.log(Person.prototype.hello);
-// console.log(Object.prototype);
-// console.log(Object.prototype.toString);
-// console.log(Object.prototype.constructor);
+function Korean(region) {
+  this.region = region;
+
+  this.where = function () {
+    console.log('where', this.region);
+  };
+}
+
+Korean.prototype = Person.prototype;
+var k = new Korean('Seoul');
+var p = new Person();
+k.where();
+k.hello(); // p.where();  
+
+p.hello(); //객체 리터럴
+
+var A = {
+  name: 'hana',
+  hello1: function hello1() {
+    console.log('hello1');
+  },
+  hello2: function hello2() {
+    console.log('hello2');
+  },
+  hello3: function hello3() {
+    console.log('hello3');
+  }
+};
+A.hello1();
+A.hello2();
+A.hello3(); //인자의 변수명과 프로퍼티의 변수명이 같은 경우 프로퍼티값을 인자값으로 바로 초기화해줌.
+
+function a(a1, a2) {
+  a1, a2;
+  return a1 + a2;
+}
+
+;
+console.log(a(2, 3));
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -166,7 +191,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51769" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49398" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
