@@ -118,51 +118,28 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"example.js":[function(require,module,exports) {
-function Person() {}
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-Person.prototype.hello = function () {
-  console.log('hello');
-};
+//표준 내장 객체 
+var a = new Array('white', 'black', 'red'); //배열을 만들어 주는 객체.
 
-function Korean(region) {
-  this.region = region;
+console.log(a, _typeof(a)); //배열을 만들어 주는 객체이기 때문에 결국 a 는 배열이면서 객체이다. 
 
-  this.where = function () {
-    console.log('where', this.region);
-  };
-}
+console.log(a instanceof Array); //true
 
-Korean.prototype = Person.prototype;
-var k = new Korean('Seoul');
-var p = new Person();
-k.where();
-k.hello(); // p.where();  
+console.log(a instanceof Object); //true
+//a 는 Array 와 Object 둘 다의 instance 이다. 
+// 리터럴로도 만들어 줄 수 있음. 
 
-p.hello(); //객체 리터럴
+var b = ['yellow', 'green', 'blue'];
+console.log(b, _typeof(b)); //object
 
-var A = {
-  name: 'hana',
-  hello1: function hello1() {
-    console.log('hello1');
-  },
-  hello2: function hello2() {
-    console.log('hello2');
-  },
-  hello3: function hello3() {
-    console.log('hello3');
-  }
-};
-A.hello1();
-A.hello2();
-A.hello3(); //인자의 변수명과 프로퍼티의 변수명이 같은 경우 프로퍼티값을 인자값으로 바로 초기화해줌.
+console.log(b.slice(0, 1)); //yellow(0번째 인자에서부터 1개 추출)
 
-function a(a1, a2) {
-  a1, a2;
-  return a1 + a2;
-}
+console.log(Array.prototype.slice); // b 가 Array 의 instance 이기 때문에 Array 가 prototype 에 만들어 놓은 slice 함수를 사용할 수 있다. 
 
-;
-console.log(a(2, 3));
+console.log(Object.prototype.slice); //undefined
+// slilce 함수는 Array 에서 만들어 놓은 함수이고, Object 에서 만든 게 아니기 때문에 결과는 undefined
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
