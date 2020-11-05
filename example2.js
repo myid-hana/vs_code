@@ -16,8 +16,8 @@ function p() {
     return new Promise((resolve, reject) => {
         //pending
         setTimeout(() => {
-            //resolve('hello world');
-            reject(new Error('bad'));
+            resolve('hello world');
+            // reject(new Error('bad'));
         }, 1000);
     });
 }
@@ -35,6 +35,17 @@ then 의 callback 함수의 인자로 받을 수 있다.
     then((reason) => {...}) */
 
 /* 프로미스 객체가 rejected 되는 시점에 p.catch 안에 설정한 callback 함수가 실행된다. */
+
+/* 
+
+then 함수에서 다시 프로미스 객체를 리턴하는 방법을 통해 체이닝 하면, 
+비동기 작업을 순차적으로 아래로 표현할 수 있다. 
+
+p.then(() => {  첫 then 함수를 실행하여 p()를 실행하고 
+    return p();
+}).then(() =>  p())  다음 then 함수를 실행한다. 이런식으로 계속 체인을 늘릴 수 있음... 
+....
+*/
 
 p().then(message => { //fulfilled 이후에 실행
     //callback 작성 공간
