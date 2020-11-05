@@ -118,21 +118,68 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"example.js":[function(require,module,exports) {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//1. 선언적 방식
-var A = function A() {
-  _classCallCheck(this, A);
-};
-
-console.log(new A()); //class 표현식을 변수에 할당 
-
-var B = function B() {
+var B = function B(name, age) {
   _classCallCheck(this, B);
+
+  this.name = name;
+  this.age = age;
 };
 
-console.log(new B()); //선언적 방식이지만 호이스팅은 일어나지 않는다. 
-//2. constructor
+var C = function C() {
+  _classCallCheck(this, C);
+
+  _defineProperty(this, "name", void 0);
+
+  _defineProperty(this, "age", void 0);
+};
+
+var D = //인강에서는 여기에서 기본값을 설정할 수 있다고 했는데 안된다.....ㅠ 
+function D() {
+  var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'djkj';
+  var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '30';
+
+  _classCallCheck(this, D);
+
+  _defineProperty(this, "name", 'GGGG');
+
+  _defineProperty(this, "age", 0);
+
+  //변수에 기본값을 설정
+  //객체를 생성할 때 자원을 초기셋팅하는 거 
+  this.name = name;
+  this.age = age;
+};
+
+console.log(new B('hana', 30));
+var c = new C();
+c.name = 'skdfjs';
+c.age = 'sldfkj;';
+console.log(c);
+console.log(new D());
+
+var StaticEx = function StaticEx() {
+  _classCallCheck(this, StaticEx);
+
+  console.log('hello', StaticEx.a, this.b);
+};
+
+_defineProperty(StaticEx, "a", 'TTT');
+
+_defineProperty(StaticEx, "b", 'RRRR');
+
+new StaticEx();
+
+var StaticEx2 = function StaticEx2() {
+  _classCallCheck(this, StaticEx2);
+};
+
+_defineProperty(StaticEx2, "name", '이 클래스의 이름은 무엇인가');
+
+console.log(StaticEx2);
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -161,7 +208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49515" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49520" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
