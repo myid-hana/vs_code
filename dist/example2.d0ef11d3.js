@@ -159,6 +159,10 @@ function p(ms) {
 Promise.all([p(1000), p(2000), p(3000), p(4000)]).then(function (messages) {
   console.log(messages);
 });
+/* 
+프로미스 객체 여러 개를 생성하여, 
+배열로 만들어 인자로 넣고 Promise.race 을 실행하면 
+배열의 모든 프로미스 객체들 중 가장 먼저 fulfilled 된 것으로, */
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
