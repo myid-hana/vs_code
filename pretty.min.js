@@ -1,0 +1,1 @@
+function Hello(l){console.log("hello, "+l)}Hello("hana");
