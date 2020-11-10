@@ -8,6 +8,7 @@
   "description": "vs_code SASS SCSS Javascript TypeScript React.js Node.js",
   "main": "example1.js",
   "dependencies": {
+    "express": "^4.17.1",
     "underscore": "^1.11.0"
   },
   "scripts": {
