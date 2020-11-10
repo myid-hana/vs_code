@@ -2,5 +2,25 @@
   "devDependencies": {
     "cssnano": "^4.1.10",
     "sass": "^1.27.0"
-  }
+  },
+  "name": "vs_code",
+  "version": "1.0.0",
+  "description": "vs_code SASS SCSS Javascript TypeScript React.js Node.js",
+  "main": "example1.js",
+  "dependencies": {
+    "underscore": "^1.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myid-hana/vs_code.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myid-hana/vs_code/issues"
+  },
+  "homepage": "https://github.com/myid-hana/vs_code#readme"
 }
