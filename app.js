@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyPaser = require('body-parser');
 let app = express(); //애플리케이션을 리턴한다. 
 
 app.set('view engine', 'pug'); //템플릿과 express 를 연결 
@@ -6,6 +7,9 @@ app.set('views', './views'); //템플릿이 있는 디렉토리
 app.locals.pretty = true; //html 구조를 예쁘게 보기
 
 app.use(express.static('public')); //정적인 데이터가 위치할 디렉토리를 지정한다. 
+app.use(bodyPaser.urlencoded({
+    extended: false
+}));
 
 app.get('/template', (req, res) => { //views 내의  template 를 라우팅
     res.render('temp', {
@@ -16,8 +20,8 @@ app.get('/template', (req, res) => { //views 내의  template 를 라우팅
 app.get('/form', function (req, res) {
     res.render('form');
 })
-app.get('/form_submit', function (req, res) {
-    let id = req.query.id;
+app.post('/form_submit', (req, res) => { //form method 를 post 로 해야 post 에서 요청을 받는다. 
+    let id = req.body.id;
     res.render('form_submit', {
         _id: id
     });
