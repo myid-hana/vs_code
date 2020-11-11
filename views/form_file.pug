@@ -13,3 +13,7 @@ html(lang='en')
             label(for='desc') 설명
             textarea(name="desc", cols="30", rows="10")
         button(type='submit') 제출
+    ul
+        -for(let i=0; i<_fileLength; i++)
+         li=_filelist[i]
+            span

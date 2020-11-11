@@ -14,7 +14,12 @@ app.use(bodyPaser.urlencoded({
 }));
 
 app.get('/topic/new', (req, res) => {
-    res.render('form_file');
+    fs.readdir('data', (err, filelist) => {
+        res.render('form_file', {
+            _filelist: filelist,
+            _fileLength: filelist.length
+        });
+    })
 });
 app.post('/topic', (req, res) => {
     let title = req.body.title;
@@ -24,7 +29,9 @@ app.post('/topic', (req, res) => {
         if (err) {
             res.status(500).send('Internal Server Error');
         }
-        res.send(title + desc);
+        res.statusCode = 302;
+        res.setHeader('Location', '/topic/new');
+        res.end();
     });
 });
 
