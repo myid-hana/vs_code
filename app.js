@@ -13,6 +13,15 @@ app.get('/template', (req, res) => { //views 내의  template 를 라우팅
         title: 'Pug Title'
     }) //temp 라는 template 파일은 웹페이지로 전송, time 변수를 temp 파일에 넘김.
 });
+app.get('/form', function (req, res) {
+    res.render('form');
+})
+app.get('/form_submit', function (req, res) {
+    let id = req.query.id;
+    res.render('form_submit', {
+        _id: id
+    });
+})
 
 //get 함수를 라우터라고 한다. 라우터는 사용자의 접속을 어떤 컨트롤러에 연결할 것인가 중개를 해주는 역할. 
 app.get('/', (req, res) => { //겟방식으로 홈에 접속한 사용자에게 처음 노출될 화면 

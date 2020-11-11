@@ -1,0 +1,13 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Form Page
+  body
+    h1 Form Page
+    form(action='/form_submit' method='get')
+        label(for='id') 아이디
+        input(type='text' name='id')
+        label(for='password') 비밀번호
+        input(type='password' name='password')
+        button(type='submit') 로그인
