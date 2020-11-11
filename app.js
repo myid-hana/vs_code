@@ -22,7 +22,19 @@ app.get('/login', function (req, res) {
     res.send('login page');
 })
 app.get('/topic', (req, res) => {
-     res.send(req.query.id+','+req.query.name);
+    let topics = [
+        'javascript is ~~~',
+        'nodejs is ~~~',
+        'express is ~~~'
+    ];
+    let output = `
+        <a href='/topic?id=0'>javascript</a><br>
+        <a href='/topic?id=1'>nodejs</a><br>
+        <a href='/topic?id=2'>express</a><br>
+
+        ${topics[req.query.id]}
+    `
+    res.send(output);
 })
 app.listen(3000, () => {
     console.log('Connected 3000 port!!');
