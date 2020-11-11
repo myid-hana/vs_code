@@ -21,6 +21,9 @@ app.get('/', (req, res) => { //겟방식으로 홈에 접속한 사용자에게 
 app.get('/login', function (req, res) {
     res.send('login page');
 })
+app.get('/topic', (req, res) => {
+     res.send(req.query.id+','+req.query.name);
+})
 app.listen(3000, () => {
     console.log('Connected 3000 port!!');
 });
