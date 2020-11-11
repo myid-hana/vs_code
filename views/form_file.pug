@@ -1,0 +1,15 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title Form File
+  body
+    h1 Form File Page
+    form(action='/topic' method='post')
+        p
+            label(for='title') 제목
+            input(type='text' name='title')
+        p
+            label(for='desc') 설명
+            textarea(name="desc", cols="30", rows="10")
+        button(type='submit') 제출
