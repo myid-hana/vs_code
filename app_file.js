@@ -13,14 +13,6 @@ app.use(bodyPaser.urlencoded({
     extended: false
 }));
 
-app.get('/topic/new', (req, res) => {
-    fs.readdir('data', (err, filelist) => {
-        res.render('form_file', {
-            _filelists: filelist,
-            _fileLength: filelist.length
-        });
-    });
-});
 app.get('/topic/:id', (req, res) => {
     let id = req.params.id;
     //console.log(id);
@@ -32,7 +24,7 @@ app.get('/topic/:id', (req, res) => {
                 _filecontent: filecontent,
                 _filelists: filelist,
                 _fileLength: filelist.length,
-            })
+            });
         });
     });
 });
