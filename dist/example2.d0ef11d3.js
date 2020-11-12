@@ -123,15 +123,18 @@ value 가 프로미스 객체인지 아닌지 알 수 없는 경우, Promise.res
     value 가 프로미스 객체면, resolve 된 then 메서드를 실행한다. 
     value 가 프로미스 객체가 아니면, value 를 인자로 보내면서 then 메서드를 실행한다. 
 */
-Promise.resolve();
+Promise.resolve(); //value 에는 promise 객체를 넣을 수도 있고 일반값을 넣을 수도 있음.
+
 Promise.resolve(new Promise(function (resolve, reject) {
   setTimeout(function () {
     resolve('hello');
   }, 1000);
 })).then(function (data) {
+  //프로미스 객체인 경우, resolve 된 결과를 받아서 then 이 실행된다. 
   console.log('value 가 프로미스 객체일때', data);
 });
 Promise.resolve('foo').then(function (data) {
+  //then 메서드가 없는 경우, 바로 fullfilled 된다. 
   console.log('value 가 프로미스 객체가 아닐 때', data);
 });
 /* Promise.reject() 를 사용하면, catch 로 연결된 rejected 상태로 연결된다. */
@@ -151,18 +154,26 @@ then 의 함수의 인자로 프로미스 객체들의 resolve 인자값을 배�
 function p(ms) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      resolve('hello');
+      resolve(ms + ' hello');
     }, ms);
   });
 }
 
 Promise.all([p(1000), p(2000), p(3000), p(4000)]).then(function (messages) {
   console.log(messages);
-});
+}); //모두 동시에 시작해서 전부 fullfilled 된 이후에 실행된다. 
+
 /* 
 프로미스 객체 여러 개를 생성하여, 
-배열로 만들어 인자로 넣고 Promise.race 을 실행하면 
-배열의 모든 프로미스 객체들 중 가장 먼저 fulfilled 된 것으로, */
+배열로 만들어 인자로 넣고 Promise.race 를 실행하면 
+배열의 모든 프로미스 객체들 중 가장 먼저 fulfilled 된 것으로, then 의 함수가 실행된다. 
+then 의 함수의 인자로 가장 먼저 fullfilled 된 프로미스 객체의 resolve 인자값을 배열로 돌려준다. 
+*/
+//Promise.race([프로미스 객체들]);
+
+Promise.race([p(1000), p(2000), p(3000), p(4000)]).then(function (messages) {
+  console.log(messages);
+});
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -191,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49520" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
