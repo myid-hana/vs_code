@@ -12185,6 +12185,8 @@ try {
 
 require("core-js/stable");
 
+var _regeneratorRuntime = require("regenerator-runtime");
+
 require("regenerator-runtime/runtime");
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -12245,8 +12247,62 @@ function p(ms) {
   }
 
   return main;
-})()(); //Promise 객체가 rejected 된 경우의 처리를 위해 try catch 를 이용한다.
-},{"core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})()(); //Promise 객체가 rejected 된 경우의 처리를 위해 try catch 를 이용한다.  
+//async function 에서 return 되는 값은 Promise.resolve 함수로 감싸서 리턴된다. 
+//new Promise 를 생성하지 않고 async 함수 자체를 사용하는 방법. 
+
+function asyncP() {
+  return _asyncP.apply(this, arguments);
+}
+
+function _asyncP() {
+  _asyncP = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            return _context3.abrupt("return", 'hana');
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _asyncP.apply(this, arguments);
+}
+
+_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+  var name;
+  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return asyncP();
+
+        case 3:
+          name = _context2.sent;
+          //비동기된 처리가 끝날 때까지 기다렸다가 ms 값을 리턴하고 아래줄을 실행한다. 
+          console.log(name + ' hello');
+          _context2.next = 10;
+          break;
+
+        case 7:
+          _context2.prev = 7;
+          _context2.t0 = _context2["catch"](0);
+          console.log(_context2.t0);
+
+        case 10:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _callee2, null, [[0, 7]]);
+}))();
+},{"core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
