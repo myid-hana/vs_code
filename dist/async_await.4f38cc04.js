@@ -12203,8 +12203,7 @@ const 함수이름 = async () => {}
 function p(ms) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      // resolve(ms);
-      reject(new Error('reason'));
+      resolve(ms); //reject(new Error('reason'));
     }, ms);
   });
 } //Promise 객체를 리턴하는 함수를 await 로 호출하는 방법 
@@ -12257,13 +12256,19 @@ function asyncP() {
 
 function _asyncP() {
   _asyncP = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+    var ms;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            return _context3.abrupt("return", 'hana');
+            _context3.next = 2;
+            return p(1000);
 
-          case 1:
+          case 2:
+            ms = _context3.sent;
+            return _context3.abrupt("return", 'hana' + ms);
+
+          case 4:
           case "end":
             return _context3.stop();
         }
@@ -12286,7 +12291,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         case 3:
           name = _context2.sent;
           //비동기된 처리가 끝날 때까지 기다렸다가 ms 값을 리턴하고 아래줄을 실행한다. 
-          console.log(name + ' hello');
+          console.log(name + ' wow');
           _context2.next = 10;
           break;
 
