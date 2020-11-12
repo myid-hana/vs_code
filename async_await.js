@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 /*
 async function 함수이름() {}    
 const 함수이름 = async () => {}
@@ -10,18 +12,21 @@ const 함수이름 = async () => {}
 function p(ms) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(ms);
+            // resolve(ms);
+            reject(new Error('reason'));
         }, ms);
     });
 }
-//Promise 객체를 이용해서 비동기 로직을 수행할 때 
-p(1000).then((ms) => {
-    console.log(ms + ' hello');
-})
+
 //Promise 객체를 리턴하는 함수를 await 로 호출하는 방법 
 //await 를 사용하는 경우, 항상 async 함수 안에서 사용되어야 한다. 
-async function main() {
-    const ms = await p(1000); //비동기된 처리가 끝날 때까지 기다렸다가 ms 값을 리턴하고 아래줄을 실행한다. 
-    console.log(ms + ' hello');
-}
-main();
+(async function main() {
+    try {
+        const ms = await p(1000); //비동기된 처리가 끝날 때까지 기다렸다가 ms 값을 리턴하고 아래줄을 실행한다. 
+        console.log(ms + ' hello');
+    } catch (error) {
+        console.log(error); 
+    }
+})();
+
+//Promise 객체가 rejected 된 경우의 처리를 위해 try catch 를 이용한다.  
