@@ -16,10 +16,25 @@ app.use(bodyPaser.urlencoded({
 app.get('/topic/new', (req, res) => {
     fs.readdir('data', (err, filelist) => {
         res.render('form_file', {
-            _filelist: filelist,
+            _filelists: filelist,
             _fileLength: filelist.length
         });
-    })
+    });
+});
+app.get('/topic/:id', (req, res) => {
+    let id = req.params.id;
+    //console.log(id);
+    fs.readdir('data', (err, filelist) => {
+        fs.readFile('data/' + id, {
+            encoding: 'utf-8'
+        }, (err, filecontent) => {
+            res.render('form_file', {
+                _filecontent: filecontent,
+                _filelists: filelist,
+                _fileLength: filelist.length,
+            })
+        });
+    });
 });
 app.post('/topic', (req, res) => {
     let title = req.body.title;

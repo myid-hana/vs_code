@@ -14,6 +14,9 @@ html(lang='en')
             textarea(name="desc", cols="30", rows="10")
         button(type='submit') 제출
     ul
-        -for(let i=0; i<_fileLength; i++)
-         li=_filelist[i]
-            span
+        each _filelist in _filelists
+         li
+            a(href="/topic/" + _filelist)
+                span=_filelist
+    article
+        h2=_filecontent
