@@ -12301,11 +12301,16 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           console.log(_context2.t0);
 
         case 10:
+          _context2.prev = 10;
+          console.log('end');
+          return _context2.finish(10);
+
+        case 13:
         case "end":
           return _context2.stop();
       }
     }
-  }, _callee2, null, [[0, 7]]);
+  }, _callee2, null, [[0, 7, 10, 13]]);
 }))();
 },{"core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime":"node_modules/regenerator-runtime/runtime.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

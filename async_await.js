@@ -47,5 +47,7 @@ async function asyncP() {
         console.log(name + ' wow');
     } catch (error) {
         console.log(error);
+    } finally {
+        console.log('end');
     }
 })();
