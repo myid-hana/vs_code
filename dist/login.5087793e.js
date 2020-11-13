@@ -13980,6 +13980,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //이메일과 비밀번호를 입력하고 로그인 버튼을 눌러서 서버에 토큰을 요청해서 받아오기. 
+
+/*
+1. 페이지가 로드되면서 main -> getToken 함수가 실행되고 localStorage 에 token 이 있는지 확인한다. 
+    1-1. token 이 있을 경우, 매인 페이지로 사용자를 이동시키고 main 함수를 종료한다. 
+    1-2. token 이 없을 경우, 계속 진행. 
+2. 사용자가 이메일과 비밀번호를 입력하고 로그인 버튼을 누르면 form tag 의 submit event 가 발생하여 login 함수가 실행된다. 
+3. 사용자가 입력한 이메일과 비밀번호를 이용하여 api 주소에 post 방식으로 token 을 요청한다. 
+    3-1. token 을 받았다면, localStorage 에 token 을 저장한다. 
+    3-2. 에러 발생 시, 경고창을 띄운다. 
+*/
 //lacalStorage 에 토큰이 있으면 토큰을 리턴해주는 함수. 
 function getToken() {
   return localStorage.getItem('token');
