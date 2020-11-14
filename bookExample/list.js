@@ -81,8 +81,17 @@ function bindLoginButton() {
     btnLogin.addEventListener('click', login);
 }
 
+function bindAddBookButton() {
+    const btnAddBook = document.querySelector('.add_book');
+    btnAddBook.addEventListener('click', addBookBtn);
+}
+
 function login() {
     location.assign('/login.html');
+}
+
+function addBookBtn() {
+    location.assign('/add.html');
 }
 
 function getUserName(user) {
@@ -145,6 +154,7 @@ async function main() {
     // 버튼에 이벤트 연결
     bindLogoutButton();
     bindLoginButton();
+    bindAddBookButton();
 
     // 토큰 체크
     const token = getToken();
