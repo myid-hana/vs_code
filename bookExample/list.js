@@ -13,7 +13,7 @@ async function getUserByToken(token) {
                 Authorization: `Bearer ${token}`, //token 으로 사용자 정보를 요청. 
             },
         });
-        console.log(res);
+        console.log(res.data);
         return res.data; //사용자정보(email, name)을 리턴. 
     } catch (error) {
         console.log('getUserByToken error', error);
@@ -82,7 +82,13 @@ function bindLoginButton() {
 }
 
 function login() {
-    location.assign('login.html');
+    location.assign('/login.html');
+}
+
+function getUserName(user) {
+    const userName = user.name;
+    const boldElement = document.querySelector('#user_name');
+    boldElement.innerHTML = userName;
 }
 
 function render(books) {
@@ -149,6 +155,7 @@ async function main() {
 
     // 토큰으로 서버에서 나의 정보 받아오기
     const user = await getUserByToken(token);
+    getUserName(user);
     if (user === null) {
         localStorage.clear();
         location.assign('/login.html');

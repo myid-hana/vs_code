@@ -14006,7 +14006,7 @@ function _getUserByToken() {
 
           case 3:
             res = _context2.sent;
-            console.log(res);
+            console.log(res.data);
             return _context2.abrupt("return", res.data);
 
           case 8:
@@ -14178,7 +14178,13 @@ function bindLoginButton() {
 }
 
 function login() {
-  location.assign('login.html');
+  location.assign('/login.html');
+}
+
+function getUserName(user) {
+  var userName = user.name;
+  var boldElement = document.querySelector('#user_name');
+  boldElement.innerHTML = userName;
 }
 
 function render(books) {
@@ -14261,9 +14267,10 @@ function _main() {
 
           case 8:
             user = _context6.sent;
+            getUserName(user);
 
             if (!(user === null)) {
-              _context6.next = 13;
+              _context6.next = 14;
               break;
             }
 
@@ -14271,25 +14278,25 @@ function _main() {
             location.assign('/login.html');
             return _context6.abrupt("return");
 
-          case 13:
-            _context6.next = 15;
+          case 14:
+            _context6.next = 16;
             return getBooks(token);
 
-          case 15:
+          case 16:
             books = _context6.sent;
 
             if (!(books === null)) {
-              _context6.next = 18;
+              _context6.next = 19;
               break;
             }
 
             return _context6.abrupt("return");
 
-          case 18:
+          case 19:
             // 받아온 책을 그리기
             render(books);
 
-          case 19:
+          case 20:
           case "end":
             return _context6.stop();
         }
