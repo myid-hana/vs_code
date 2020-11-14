@@ -13964,7 +13964,7 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"list.js":[function(require,module,exports) {
+},{}],"add.js":[function(require,module,exports) {
 "use strict";
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -13983,266 +13983,77 @@ function getToken() {
   return localStorage.getItem('token');
 }
 
-function getUserByToken(_x) {
-  return _getUserByToken.apply(this, arguments);
+function addBook(_x) {
+  return _addBook.apply(this, arguments);
 }
 
-function _getUserByToken() {
-  _getUserByToken = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(token) {
-    var res;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+function _addBook() {
+  _addBook = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+    var titleElement, messageElement, authorElement, urlElement, title, message, author, url, token, res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context.prev = _context.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return _axios.default.get('https://api.marktube.tv/v1/me', {
-              //사용자 정보를 요청하는 api 
-              headers: {
-                Authorization: "Bearer ".concat(token) //token 으로 사용자 정보를 요청. 
-
-              }
-            });
-
-          case 3:
-            res = _context2.sent;
-            console.log(res.data);
-            return _context2.abrupt("return", res.data);
-
-          case 8:
-            _context2.prev = 8;
-            _context2.t0 = _context2["catch"](0);
-            console.log('getUserByToken error', _context2.t0);
-            return _context2.abrupt("return", null);
-
-          case 12:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[0, 8]]);
-  }));
-  return _getUserByToken.apply(this, arguments);
-}
-
-function logout() {
-  return _logout.apply(this, arguments);
-}
-
-function _logout() {
-  _logout = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-    var token;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.classList.add('was-validated');
+            titleElement = document.querySelector('#title');
+            messageElement = document.querySelector('#message');
+            authorElement = document.querySelector('#author');
+            urlElement = document.querySelector('#url');
+            title = titleElement.value;
+            message = messageElement.value;
+            author = authorElement.value;
+            url = urlElement.value;
+            console.log(title, message, author, url);
+            _context.prev = 12;
             token = getToken();
 
             if (!(token === null)) {
-              _context3.next = 4;
+              _context.next = 17;
               break;
             }
 
-            //로그아웃 버튼을 눌렀을 때 token 이 없으면 로그인 페이지로 이동. 
-            location.assign('/login.html');
-            return _context3.abrupt("return");
-
-          case 4:
-            _context3.prev = 4;
-            _context3.next = 7;
-            return _axios.default.delete('https://api.marktube.tv/v1/me', {
-              //delete 로 api 에 token 삭제 요청. 
-              headers: {
-                Authorization: "Bearer ".concat(token)
-              }
-            });
-
-          case 7:
-            _context3.next = 12;
-            break;
-
-          case 9:
-            _context3.prev = 9;
-            _context3.t0 = _context3["catch"](4);
-            console.log('logout error', _context3.t0);
-
-          case 12:
-            _context3.prev = 12;
-            localStorage.clear();
-            alert('로그아웃되었습니다.');
-            location.assign('/login.html');
-            return _context3.finish(12);
+            location.href = '/login';
+            return _context.abrupt("return");
 
           case 17:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, null, [[4, 9, 12, 17]]);
-  }));
-  return _logout.apply(this, arguments);
-}
-
-function getBooks(_x2) {
-  return _getBooks.apply(this, arguments);
-}
-
-function _getBooks() {
-  _getBooks = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(token) {
-    var res;
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-      while (1) {
-        switch (_context4.prev = _context4.next) {
-          case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
-            return _axios.default.get('https://api.marktube.tv/v1/book', {
-              //책 정보를 요청하는 api. 
+            _context.next = 19;
+            return _axios.default.post('https://api.marktube.tv/v1/book', {
+              title: title,
+              message: message,
+              author: author,
+              url: url
+            }, {
               headers: {
                 Authorization: "Bearer ".concat(token)
               }
             });
 
-          case 3:
-            res = _context4.sent;
+          case 19:
+            res = _context.sent;
             console.log(res);
-            return _context4.abrupt("return", res.data);
+            return _context.abrupt("return", res.data);
 
-          case 8:
-            _context4.prev = 8;
-            _context4.t0 = _context4["catch"](0);
-            console.log('getBooks error', _context4.t0);
-            return _context4.abrupt("return", null);
+          case 24:
+            _context.prev = 24;
+            _context.t0 = _context["catch"](12);
+            console.log('addBook error', _context.t0);
+            return _context.abrupt("return", null);
 
-          case 12:
+          case 28:
           case "end":
-            return _context4.stop();
+            return _context.stop();
         }
       }
-    }, _callee4, null, [[0, 8]]);
+    }, _callee, null, [[12, 24]]);
   }));
-  return _getBooks.apply(this, arguments);
-}
-
-function deleteBook(_x3) {
-  return _deleteBook.apply(this, arguments);
-}
-
-function _deleteBook() {
-  _deleteBook = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(bookId) {
-    var token;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            token = getToken();
-
-            if (!(token === null)) {
-              _context5.next = 4;
-              break;
-            }
-
-            location.assign('/login.html');
-            return _context5.abrupt("return");
-
-          case 4:
-            _context5.next = 6;
-            return _axios.default.delete("https://api.marktube.tv/v1/book/".concat(bookId), {
-              //delete 로 api 에 book 삭제 요청. 
-              headers: {
-                Authorization: "Bearer ".concat(token)
-              }
-            });
-
-          case 6:
-            return _context5.abrupt("return");
-
-          case 7:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
-  return _deleteBook.apply(this, arguments);
-}
-
-function bindLogoutButton() {
-  var btnLogout = document.querySelector('#btn_logout');
-  btnLogout.addEventListener('click', logout);
-}
-
-function bindLoginButton() {
-  var btnLogin = document.querySelector('#btn_login');
-  btnLogin.addEventListener('click', login);
+  return _addBook.apply(this, arguments);
 }
 
 function bindAddBookButton() {
-  var btnAddBook = document.querySelector('.add_book');
-  btnAddBook.addEventListener('click', addBookBtn);
-}
-
-function login() {
-  location.assign('/login.html');
-}
-
-function addBookBtn() {
-  location.assign('/add.html');
-}
-
-function getUserName(user) {
-  var userName = user.name;
-  var boldElement = document.querySelector('#user_name');
-  boldElement.innerHTML = userName;
-}
-
-function render(books) {
-  var listElement = document.querySelector('#list');
-
-  for (var i = 0; i < books.length; i++) {
-    var book = books[i];
-    var bookElement = document.createElement('div');
-    bookElement.classList.value = 'col-md-4';
-    bookElement.innerHTML = "\n      <div class=\"card mb-4 shadow-sm\">\n        <div class=\"card-body\">\n          <p class=\"card-text\">".concat(book.title === '' ? '제목 없음' : book.title, "</p>\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <div class=\"btn-group\">\n              <a href=\"/book?id=").concat(book.bookId, "\">\n                <button\n                  type=\"button\"\n                  class=\"btn btn-sm btn-outline-secondary\"\n                >\n                  View\n                </button>\n              </a>\n              <button\n                type=\"button\"\n                class=\"btn btn-sm btn-outline-secondary btn-delete\"\n                data-book-id=\"").concat(book.bookId, "\"\n              >\n                Delete\n              </button>\n            </div>\n            <small class=\"text-muted\">").concat(new Date(book.createdAt).toLocaleString(), "</small>\n          </div>\n        </div>\n      </div>\n      ");
-    listElement.append(bookElement);
-  }
-
-  document.querySelectorAll('.btn-delete').forEach(function (element) {
-    element.addEventListener('click', /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        var bookId;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                bookId = event.target.dataset.bookId;
-                _context.prev = 1;
-                _context.next = 4;
-                return deleteBook(bookId);
-
-              case 4:
-                location.reload();
-                _context.next = 10;
-                break;
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](1);
-                console.log(_context.t0);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[1, 7]]);
-      }));
-
-      return function (_x4) {
-        return _ref.apply(this, arguments);
-      };
-    }());
-  });
+  var form = document.querySelector('#form_add_book');
+  form.addEventListener('submit', addBook);
 }
 
 function main() {
@@ -14250,69 +14061,31 @@ function main() {
 }
 
 function _main() {
-  _main = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-    var token, user, books;
-    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+  _main = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    var token;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context6.prev = _context6.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
             // 버튼에 이벤트 연결
-            bindLogoutButton();
-            bindLoginButton();
             bindAddBookButton(); // 토큰 체크
 
             token = getToken();
 
             if (!(token === null)) {
-              _context6.next = 7;
+              _context2.next = 5;
               break;
             }
 
             location.assign('/login.html');
-            return _context6.abrupt("return");
+            return _context2.abrupt("return");
 
-          case 7:
-            _context6.next = 9;
-            return getUserByToken(token);
-
-          case 9:
-            user = _context6.sent;
-
-            if (!(user === null)) {
-              _context6.next = 14;
-              break;
-            }
-
-            localStorage.clear();
-            location.assign('/login.html');
-            return _context6.abrupt("return");
-
-          case 14:
-            getUserName(user); // 나의 책을 서버에서 받아오기
-
-            _context6.next = 17;
-            return getBooks(token);
-
-          case 17:
-            books = _context6.sent;
-
-            if (!(books === null)) {
-              _context6.next = 20;
-              break;
-            }
-
-            return _context6.abrupt("return");
-
-          case 20:
-            // 받아온 책을 그리기
-            render(books);
-
-          case 21:
+          case 5:
           case "end":
-            return _context6.stop();
+            return _context2.stop();
         }
       }
-    }, _callee6);
+    }, _callee2);
   }));
   return _main.apply(this, arguments);
 }
@@ -14346,7 +14119,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57343" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -14522,5 +14295,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","list.js"], null)
-//# sourceMappingURL=/list.77ef9d65.js.map
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","add.js"], null)
+//# sourceMappingURL=/add.8fe46a61.js.map
