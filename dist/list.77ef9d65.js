@@ -14267,10 +14267,9 @@ function _main() {
 
           case 8:
             user = _context6.sent;
-            getUserName(user);
 
             if (!(user === null)) {
-              _context6.next = 14;
+              _context6.next = 13;
               break;
             }
 
@@ -14278,7 +14277,9 @@ function _main() {
             location.assign('/login.html');
             return _context6.abrupt("return");
 
-          case 14:
+          case 13:
+            getUserName(user); // 나의 책을 서버에서 받아오기
+
             _context6.next = 16;
             return getBooks(token);
 

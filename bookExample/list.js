@@ -155,12 +155,12 @@ async function main() {
 
     // 토큰으로 서버에서 나의 정보 받아오기
     const user = await getUserByToken(token);
-    getUserName(user);
     if (user === null) {
         localStorage.clear();
         location.assign('/login.html');
         return;
     }
+    getUserName(user);
 
     // 나의 책을 서버에서 받아오기
     const books = await getBooks(token);
