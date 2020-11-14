@@ -14014,36 +14014,35 @@ function _login() {
             passwordElement = document.querySelector('#password');
             email = emailElement.value;
             password = passwordElement.value;
-            console.log(email, password);
-            _context.prev = 7;
-            _context.next = 10;
+            _context.prev = 6;
+            _context.next = 9;
             return _axios.default.post('https://api.marktube.tv/v1/me', {
               email: email,
               password: password
             });
 
-          case 10:
+          case 9:
             res = _context.sent;
-            console.log(res);
             token = res.data.token; //응답의 body 내용을 token 상수에 넣는다. 
 
             if (!(token === undefined)) {
-              _context.next = 15;
+              _context.next = 13;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 15:
+          case 13:
             localStorage.setItem('token', token); //토큰 값이 있으면 localStorage 에 token 값을 저장한다. 
-            // location = '/index.html';
 
+            console.log(email, password);
+            location.assign('/index.html');
             _context.next = 23;
             break;
 
           case 18:
             _context.prev = 18;
-            _context.t0 = _context["catch"](7);
+            _context.t0 = _context["catch"](6);
             //post 요청 중에 에러가 발생한 경우 
             console.log(_context.t0);
             data = _context.t0.response.data; //에러 응답의 body 를 data 상수에 넣는다. 
@@ -14063,7 +14062,7 @@ function _login() {
             return _context.stop();
         }
       }
-    }, _callee, null, [[7, 18]]);
+    }, _callee, null, [[6, 18]]);
   }));
   return _login.apply(this, arguments);
 }
@@ -14136,7 +14135,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52468" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60527" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -37,8 +37,8 @@ async function logout() {
         console.log('logout error', error);
     } finally {
         localStorage.clear();
-        location.assign('/index.html');
         alert('로그아웃되었습니다.');
+        location.assign('/login.html');
     }
 }
 

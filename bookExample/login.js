@@ -29,14 +29,11 @@ async function login(event) { //로그인 버튼을 누르면 실행되는 함�
     const email = emailElement.value;
     const password = passwordElement.value;
 
-    console.log(email, password);
-
     try {
         const res = await Axios.post('https://api.marktube.tv/v1/me', {
             email,
             password,
         });
-        console.log(res);
         const {
             token
         } = res.data; //응답의 body 내용을 token 상수에 넣는다. 
@@ -44,7 +41,8 @@ async function login(event) { //로그인 버튼을 누르면 실행되는 함�
             return;
         }
         localStorage.setItem('token', token); //토큰 값이 있으면 localStorage 에 token 값을 저장한다. 
-        // location = '/index.html';
+        console.log(email, password);
+        location.assign('/index.html');
     } catch (error) { //post 요청 중에 에러가 발생한 경우 
         console.log(error);
         const data = error.response.data; //에러 응답의 body 를 data 상수에 넣는다. 

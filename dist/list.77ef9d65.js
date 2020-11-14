@@ -14069,8 +14069,8 @@ function _logout() {
           case 12:
             _context3.prev = 12;
             localStorage.clear();
-            location.assign('/index.html');
             alert('로그아웃되었습니다.');
+            location.assign('/login.html');
             return _context3.finish(12);
 
           case 17:
@@ -14336,7 +14336,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49354" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60055" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
