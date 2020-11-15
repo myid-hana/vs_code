@@ -14038,8 +14038,20 @@ function _getBook() {
 function render(book) {
   var liEliment = document.querySelector('#list');
   var bookEliment = document.createElement('div');
-  bookEliment.innerHTML = "<span>title: ".concat(book.title, "</span><br>\n        <span>author: ").concat(book.author, "</span><br>\n        <span>message: ").concat(book.message, "</span><br>\n        <span>url: ").concat(book.url, "</span><br>\n        <button>\uCC45 \uB0B4\uC6A9 \uBCC0\uACBD\uD558\uAE30</button><button>\uCC45 \uC0AD\uC81C\uD558\uAE30</button>");
+  bookEliment.innerHTML = "<span>title: ".concat(book.title, "</span><br>\n        <span>author: ").concat(book.author, "</span><br>\n        <span>message: ").concat(book.message, "</span><br>\n        <span>url: ").concat(book.url, "</span><br>\n        <button id=\"edit_btn\">\uCC45 \uB0B4\uC6A9 \uBCC0\uACBD\uD558\uAE30</button><button>\uCC45 \uC0AD\uC81C\uD558\uAE30</button>");
   liEliment.appendChild(bookEliment);
+}
+
+function bindEditBtn() {
+  var editBtn = document.querySelector('#edit_btn');
+
+  if (editBtn) {
+    editBtn.addEventListener('click', goEditBookPage);
+  }
+}
+
+function goEditBookPage() {
+  location.assign('/edit.html');
 }
 
 function getUrlParams() {
@@ -14101,8 +14113,9 @@ function _main() {
           case 11:
             // 3. 받아온 책을 그리기
             render(book);
+            bindEditBtn();
 
-          case 12:
+          case 13:
           case "end":
             return _context2.stop();
         }
@@ -14141,7 +14154,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
