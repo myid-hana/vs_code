@@ -14203,7 +14203,7 @@ function render(books) {
     var book = books[i];
     var bookElement = document.createElement('div');
     bookElement.classList.value = 'col-md-4';
-    bookElement.innerHTML = "\n      <div class=\"card mb-4 shadow-sm\">\n        <div class=\"card-body\">\n          <p class=\"card-text\">".concat(book.title === '' ? '제목 없음' : book.title, "</p>\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <div class=\"btn-group\">\n              <a href=\"/book?id=").concat(book.bookId, "\">\n                <button\n                  type=\"button\"\n                  class=\"btn btn-sm btn-outline-secondary\"\n                >\n                  View\n                </button>\n              </a>\n              <button\n                type=\"button\"\n                class=\"btn btn-sm btn-outline-secondary btn-delete\"\n                data-book-id=\"").concat(book.bookId, "\"\n              >\n                Delete\n              </button>\n            </div>\n            <small class=\"text-muted\">").concat(new Date(book.createdAt).toLocaleString(), "</small>\n          </div>\n        </div>\n      </div>\n      ");
+    bookElement.innerHTML = "\n      <div class=\"card mb-4 shadow-sm\">\n        <div class=\"card-body\">\n          <p class=\"card-text\">".concat(book.title === '' ? '제목 없음' : book.title, "</p>\n          <div class=\"d-flex justify-content-between align-items-center\">\n            <div class=\"btn-group\">\n              <a href=\"/book.html?id=").concat(book.bookId, "\">\n                <button\n                  type=\"button\"\n                  class=\"btn btn-sm btn-outline-secondary\"\n                >\n                  View\n                </button>\n              </a>\n              <button\n                type=\"button\"\n                class=\"btn btn-sm btn-outline-secondary btn-delete\"\n                data-book-id=\"").concat(book.bookId, "\"\n              >\n                Delete\n              </button>\n            </div>\n            <small class=\"text-muted\">").concat(new Date(book.createdAt).toLocaleString(), "</small>\n          </div>\n        </div>\n      </div>\n      ");
     listElement.append(bookElement);
   }
 
@@ -14346,7 +14346,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57448" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
