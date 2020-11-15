@@ -13964,12 +13964,14 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"book.js":[function(require,module,exports) {
+},{}],"edit.js":[function(require,module,exports) {
 "use strict";
 
 var _axios = _interopRequireDefault(require("axios"));
 
 require("core-js/stable");
+
+var _regeneratorRuntime = require("regenerator-runtime");
 
 require("regenerator-runtime/runtime");
 
@@ -13979,67 +13981,74 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-/* 
-1. 토큰을 확인한다. 
-2. bookid 를 이용해서 책 정보를 요청한다. 
-3. 받아온 정보를 랜더링 해준다. 
- */
 function getToken() {
-  //토큰을 가져온다. 
   return localStorage.getItem('token');
 }
 
-function getBook(_x) {
-  return _getBook.apply(this, arguments);
+function edit(_x) {
+  return _edit.apply(this, arguments);
 }
 
-function _getBook() {
-  _getBook = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(bookId) {
-    var token, res;
+function _edit() {
+  _edit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+    var bookId, id, token, titleElement, messageElement, authorElement, urlElement, title, message, author, url, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            token = localStorage.getItem('token');
-
-            if (token == null) {
-              location.assign('/login.html');
-            }
-
-            _context.prev = 2;
-            _context.next = 5;
-            return _axios.default.get("https://api.marktube.tv/v1/book/".concat(bookId), {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.classList.add('was-validated');
+            bookId = getUrlParams();
+            id = bookId.id;
+            token = getToken();
+            titleElement = document.querySelector('#title');
+            messageElement = document.querySelector('#message');
+            authorElement = document.querySelector('#author');
+            urlElement = document.querySelector('#url');
+            title = titleElement.value;
+            message = messageElement.value;
+            author = authorElement.value;
+            url = urlElement.value;
+            _context.prev = 14;
+            console.log(id);
+            _context.next = 18;
+            return _axios.default.patch("https://api.marktube.tv/v1/book/".concat(id), {
+              title: title,
+              message: message,
+              author: author,
+              url: url
+            }, {
               headers: {
                 Authorization: "Bearer ".concat(token)
               }
             });
 
-          case 5:
+          case 18:
             res = _context.sent;
-            console.log(res.data);
-            return _context.abrupt("return", res.data);
+            console.log(res);
+            _context.next = 26;
+            break;
 
-          case 10:
-            _context.prev = 10;
-            _context.t0 = _context["catch"](2);
-            console.log('getBook error', _context.t0);
+          case 22:
+            _context.prev = 22;
+            _context.t0 = _context["catch"](14);
+            console.log('editBook error', _context.t0);
             return _context.abrupt("return", null);
 
-          case 14:
+          case 26:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[2, 10]]);
+    }, _callee, null, [[14, 22]]);
   }));
-  return _getBook.apply(this, arguments);
+  return _edit.apply(this, arguments);
 }
 
-function render(book) {
-  var liEliment = document.querySelector('#list');
-  var bookEliment = document.createElement('div');
-  bookEliment.innerHTML = "<span>title: ".concat(book.title, "</span><br>\n        <span>author: ").concat(book.author, "</span><br>\n        <span>message: ").concat(book.message, "</span><br>\n        <span>url: ").concat(book.url, "</span><br>\n        <a href=\"/edit.html?id=").concat(book.bookId, "\">\n                <button\n                  type=\"button\"\n                  class=\"btn btn-sm btn-outline-secondary\"\n                >\n                  View\n                </button>\n              </a><button>\uCC45 \uC0AD\uC81C\uD558\uAE30</button>");
-  liEliment.appendChild(bookEliment);
+function submitFormEditBook() {
+  var form = document.querySelector('#form_edit_book');
+  form.addEventListener('submit', edit);
 }
 
 function getUrlParams() {
@@ -14065,15 +14074,15 @@ function main() {
 
 function _main() {
   _main = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-    var token, urlParams, bookId, book;
+    var token;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            //1. 토큰을 확인한다. 
-            token = getToken(); //token 이 있는지 확인하고 없으면 로그인 페이지로 이동. 
+            // 1. 토큰 체크
+            token = getToken();
 
-            if (!(token == null)) {
+            if (!(token === null)) {
               _context2.next = 4;
               break;
             }
@@ -14082,27 +14091,9 @@ function _main() {
             return _context2.abrupt("return");
 
           case 4:
-            // 2. 나의 책을 서버에서 받아오기
-            urlParams = getUrlParams();
-            bookId = urlParams.id;
-            _context2.next = 8;
-            return getBook(bookId);
+            submitFormEditBook();
 
-          case 8:
-            book = _context2.sent;
-
-            if (!(book === null)) {
-              _context2.next = 11;
-              break;
-            }
-
-            return _context2.abrupt("return");
-
-          case 11:
-            // 3. 받아온 책을 그리기
-            render(book);
-
-          case 12:
+          case 5:
           case "end":
             return _context2.stop();
         }
@@ -14113,7 +14104,7 @@ function _main() {
 }
 
 document.addEventListener('DOMContentLoaded', main);
-},{"axios":"../node_modules/axios/index.js","core-js/stable":"../node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","core-js/stable":"../node_modules/core-js/stable/index.js","regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js","regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -14141,7 +14132,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64892" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59062" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -14317,5 +14308,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","book.js"], null)
-//# sourceMappingURL=/book.a91845a6.js.map
+},{}]},{},["../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","edit.js"], null)
+//# sourceMappingURL=/edit.eb194f7d.js.map

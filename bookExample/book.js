@@ -40,19 +40,15 @@ function render(book) {
         <span>author: ${book.author}</span><br>
         <span>message: ${book.message}</span><br>
         <span>url: ${book.url}</span><br>
-        <button id="edit_btn">책 내용 변경하기</button><button>책 삭제하기</button>`;
+        <a href="/edit.html?id=${book.bookId}">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  View
+                </button>
+              </a><button>책 삭제하기</button>`;
     liEliment.appendChild(bookEliment);
-}
-
-function bindEditBtn() {
-    const editBtn = document.querySelector('#edit_btn');
-    if (editBtn) {
-        editBtn.addEventListener('click', goEditBookPage);
-    }
-}
-
-function goEditBookPage() {
-    location.assign('/edit.html');
 }
 
 function getUrlParams() { //url에서 bookid 추출하기. 
@@ -68,7 +64,6 @@ function getUrlParams() { //url에서 bookid 추출하기.
         });
     return vars;
 };
-
 
 async function main() {
     //1. 토큰을 확인한다. 
@@ -88,7 +83,6 @@ async function main() {
 
     // 3. 받아온 책을 그리기
     render(book);
-    bindEditBtn();
 }
 
 document.addEventListener('DOMContentLoaded', main);
