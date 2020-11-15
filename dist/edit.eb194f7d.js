@@ -13991,7 +13991,7 @@ function edit(_x) {
 
 function _edit() {
   _edit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-    var bookId, id, token, titleElement, messageElement, authorElement, urlElement, title, message, author, url, res;
+    var bookId, token, titleElement, messageElement, authorElement, urlElement, title, message, author, url, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -14000,7 +14000,6 @@ function _edit() {
             event.stopPropagation();
             event.target.classList.add('was-validated');
             bookId = getUrlParams();
-            id = bookId.id;
             token = getToken();
             titleElement = document.querySelector('#title');
             messageElement = document.querySelector('#message');
@@ -14010,10 +14009,19 @@ function _edit() {
             message = messageElement.value;
             author = authorElement.value;
             url = urlElement.value;
-            _context.prev = 14;
-            console.log(id);
-            _context.next = 18;
-            return _axios.default.patch("https://api.marktube.tv/v1/book/".concat(id), {
+            _context.prev = 13;
+
+            if (!(title === '' || message === '' || author === '' || url === '')) {
+              _context.next = 16;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 16:
+            console.log(bookId);
+            _context.next = 19;
+            return _axios.default.patch("https://api.marktube.tv/v1/book/".concat(bookId), {
               title: title,
               message: message,
               author: author,
@@ -14024,24 +14032,24 @@ function _edit() {
               }
             });
 
-          case 18:
+          case 19:
             res = _context.sent;
             console.log(res);
-            _context.next = 26;
+            _context.next = 27;
             break;
 
-          case 22:
-            _context.prev = 22;
-            _context.t0 = _context["catch"](14);
+          case 23:
+            _context.prev = 23;
+            _context.t0 = _context["catch"](13);
             console.log('editBook error', _context.t0);
             return _context.abrupt("return", null);
 
-          case 26:
+          case 27:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[14, 22]]);
+    }, _callee, null, [[13, 23]]);
   }));
   return _edit.apply(this, arguments);
 }
@@ -14053,17 +14061,20 @@ function submitFormEditBook() {
 
 function getUrlParams() {
   //url에서 bookid 추출하기. 
-  var vars = {};
-  if (window.location.search.length !== 0) window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-    key = decodeURIComponent(key);
-
-    if (typeof vars[key] === "undefined") {
-      vars[key] = decodeURIComponent(value);
-    } else {
-      vars[key] = [].concat(vars[key], decodeURIComponent(value));
-    }
-  });
-  return vars;
+  // var vars = {};
+  // if (window.location.search.length !== 0)
+  //     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+  //         key = decodeURIComponent(key);
+  //         if (typeof vars[key] === "undefined") {
+  //             vars[key] = decodeURIComponent(value);
+  //         } else {
+  //             vars[key] = [].concat(vars[key], decodeURIComponent(value));
+  //         }
+  //     });
+  // return vars;
+  var bookId = new URL(location.href).searchParams.get('id');
+  console.log("bookId = ".concat(bookId));
+  return bookId;
 }
 
 ;
@@ -14132,7 +14143,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59062" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63504" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

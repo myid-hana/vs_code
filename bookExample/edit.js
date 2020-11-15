@@ -1,8 +1,5 @@
 import Axios from 'axios';
 import "core-js/stable";
-import {
-    async
-} from 'regenerator-runtime';
 import "regenerator-runtime/runtime";
 
 function getToken() {
@@ -15,7 +12,6 @@ async function edit(event) {
     event.target.classList.add('was-validated');
 
     const bookId = getUrlParams();
-    const id = bookId.id;
     const token = getToken();
 
     const titleElement = document.querySelector('#title');
@@ -29,8 +25,12 @@ async function edit(event) {
     const url = urlElement.value;
 
     try {
-        console.log(id);
-        const res = await Axios.patch(`https://api.marktube.tv/v1/book/${id}`, {
+        if (title === '' || message === '' || author === '' || url === '') {
+            return;
+        }
+
+        //console.log(bookId);
+        const res = await Axios.patch(`https://api.marktube.tv/v1/book/${bookId}`, {
             title,
             message,
             author,
@@ -40,7 +40,7 @@ async function edit(event) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        console.log(res);
+        //console.log(res);
     } catch (error) {
         console.log('editBook error', error);
         return null;
@@ -53,17 +53,20 @@ function submitFormEditBook() {
 }
 
 function getUrlParams() { //url에서 bookid 추출하기. 
-    var vars = {};
-    if (window.location.search.length !== 0)
-        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-            key = decodeURIComponent(key);
-            if (typeof vars[key] === "undefined") {
-                vars[key] = decodeURIComponent(value);
-            } else {
-                vars[key] = [].concat(vars[key], decodeURIComponent(value));
-            }
-        });
-    return vars;
+    // var vars = {};
+    // if (window.location.search.length !== 0)
+    //     window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+    //         key = decodeURIComponent(key);
+    //         if (typeof vars[key] === "undefined") {
+    //             vars[key] = decodeURIComponent(value);
+    //         } else {
+    //             vars[key] = [].concat(vars[key], decodeURIComponent(value));
+    //         }
+    //     });
+    // return vars;
+    const bookId = new URL(location.href).searchParams.get('id');
+    //console.log(`bookId = ${bookId}`);
+    return bookId;
 };
 
 async function main() {
